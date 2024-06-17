@@ -7,11 +7,6 @@ output "vpc_id" {
   value       = try(one(aws_vpc.this).id, null)
 }
 
-output "vpc_arn" {
-  description = "The ARN of the VPC"
-  value       = try(one(aws_vpc.this).arn, null)
-}
-
 output "vpc_cidr_block" {
   description = "The CIDR block of the VPC"
   value       = try(one(aws_vpc.this).cidr_block, null)
@@ -26,11 +21,6 @@ output "private_subnets" {
   value       = aws_subnet.private[*].id
 }
 
-output "private_subnet_arns" {
-  description = "List of ARNs of private subnets"
-  value       = aws_subnet.private[*].arn
-}
-
 output "private_subnets_cidr_blocks" {
   description = "List of cidr_blocks of private subnets"
   value       = compact(aws_subnet.private[*].cidr_block)
@@ -39,11 +29,6 @@ output "private_subnets_cidr_blocks" {
 output "public_subnets" {
   description = "List of IDs of public subnets"
   value       = aws_subnet.public[*].id
-}
-
-output "public_subnet_arns" {
-  description = "List of ARNs of public subnets"
-  value       = aws_subnet.public[*].arn
 }
 
 output "public_subnets_cidr_blocks" {
@@ -58,11 +43,6 @@ output "public_subnets_cidr_blocks" {
 output "igw_id" {
   description = "The ID of the Internet Gateway"
   value       = try(one(aws_internet_gateway.this).id, null)
-}
-
-output "igw_arn" {
-  description = "The ARN of the Internet Gateway"
-  value       = try(one(aws_internet_gateway.this).arn, null)
 }
 
 ################################################################################
@@ -100,3 +80,13 @@ output "public_route_table_id" {
 ################################################################################
 # Network ACLs
 ################################################################################
+
+output "private_network_acl_id" {
+  description = "ID of the private network ACL"
+  value       = one(aws_network_acl.private).id
+}
+
+output "public_network_acl_id" {
+  description = "ID of the public network ACL"
+  value       = one(aws_network_acl.public).id
+}
