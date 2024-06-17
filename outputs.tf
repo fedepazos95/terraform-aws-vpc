@@ -70,11 +70,11 @@ output "natgw_ids" {
 
 output "private_route_table_ids" {
   description = "List of IDs of private route tables"
-  value       = aws_route_table.private[*].id
+  value       = try(aws_route_table.private[*].id, null)
 }
 output "public_route_table_id" {
   description = "The ID of the Public Route Table"
-  value       = aws_route_table.public.id
+  value       = try(one(aws_route_table.public).id, null)
 }
 
 ################################################################################
@@ -83,10 +83,10 @@ output "public_route_table_id" {
 
 output "private_network_acl_id" {
   description = "ID of the private network ACL"
-  value       = one(aws_network_acl.private).id
+  value       = try(one(aws_network_acl.private).id, null)
 }
 
 output "public_network_acl_id" {
   description = "ID of the public network ACL"
-  value       = one(aws_network_acl.public).id
+  value       = try(one(aws_network_acl.public).id, null)
 }
