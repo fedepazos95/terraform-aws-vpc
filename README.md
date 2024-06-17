@@ -2,6 +2,8 @@
 
 This Terraform module creates a Virtual Private Cloud (VPC) along with the corresponding subnets, route tables, and network ACLs (NACLs).
 
+![Terraform VPC Diagram](diagrams/mvp.png)
+
 ## Features
 
 - Creates a VPC with a customizable CIDR block.
