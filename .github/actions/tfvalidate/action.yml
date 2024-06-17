@@ -1,0 +1,19 @@
+name: 'Terraform Validate'
+description: 'A custom GitHub Action to run terraform validate'
+author: 'Federico Pazos'
+inputs:
+  directory:
+    description: 'The directory where Terraform code is located'
+    required: false
+    default: '.'
+
+runs:
+  using: 'docker'
+  image: 'hashicorp/terraform:1.8.5'
+  entrypoint: '/bin/sh'
+  args:
+    - -c
+    - |
+      cd ${{ inputs.directory }}
+      terraform init -input=false
+      terraform validate
